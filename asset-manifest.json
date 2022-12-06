@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Zaxar-Lenin/AnanimusChatFront/static/css/main.05b05b53.css",
+    "main.js": "/Zaxar-Lenin/AnanimusChatFront/static/js/main.81ac9753.js",
+    "index.html": "/Zaxar-Lenin/AnanimusChatFront/index.html",
+    "main.05b05b53.css.map": "/Zaxar-Lenin/AnanimusChatFront/static/css/main.05b05b53.css.map",
+    "main.81ac9753.js.map": "/Zaxar-Lenin/AnanimusChatFront/static/js/main.81ac9753.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.05b05b53.css",
+    "static/js/main.81ac9753.js"
+  ]
+}
