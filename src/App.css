@@ -1,38 +1,158 @@
 .App {
-  text-align: center;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logIn {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    justify-content: space-around;
+    height: 300px;
+}
+
+.main {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+.header{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1c0a41;
+    width: 100%;
+    height: 70px;
+}
+
+.headerName{
+    justify-self: start;
+    color: #ffffff;
+
+}
+
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat {
+    width: 100%;
+    position: relative;
+}
+
+.noUser {
+    background-color: #15253d;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noUser h2{
+    width: 300px;
+    height: 40px;
+}
+
+.item{
+    cursor: pointer;
+    padding: 5px;
+    width: 200px;
+    height: 40px;
+    margin: 15px 0 15px 10px;
+    background-color: aliceblue;
+}
+
+.dialogs {
+    /*padding: 70px 0 0 0;*/
+    /*margin: 70px 0 0 0;*/
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #9a3562;
+    overflow: auto;
+}
+
+.message{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    min-height: 100px;
+    background-color: #a8a2a2;
+    padding: 10px;
+    margin: 30px;
+}
+.ms{
+    min-height: 30px;
+}
+
+.msHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.data{
+    align-self: end;
+}
+
+.topic{
+    align-self: start;
+    display: flex;
+}
+
+.imgC img{
+    width: 15px;
+    height: 15px;
+    margin: 5px 0 0 4px;
+}
+
+.listUsers {
+    background-color: #282c34;
+    width: 400px;
+    overflow: auto;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
