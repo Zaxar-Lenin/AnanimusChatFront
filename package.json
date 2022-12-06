@@ -1,7 +1,7 @@
 {
   "name": "chat",
   "version": "0.1.0",
-  "homepage":"https://github.com/Zaxar-Lenin/AnanimusChatFront",
+  "homepage":"https://Zaxar-Lenin.github.io/AnanimusChatFront",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
