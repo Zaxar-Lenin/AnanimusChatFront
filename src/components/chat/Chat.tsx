@@ -33,9 +33,9 @@ const Chat: FC<Props> = ({handleOutLogin, setOpenModal}) => {
                         color: "#000",
                     }}>Выйти</Button></div>
                 <Routes>
-                    <Route path={"/"} element={<Navigate to={'/no-user'} />}/>
-                    <Route path={'/no-user'} element={<div className={"noUser"}><h2>Пользователь не выбран</h2></div>}/>
-                    <Route path={'/user/:id'} element={<Dialogs/>}/>
+                    <Route path={"/"} element={<Navigate to={'/AnanimusChatFront/no-user'} />}/>
+                    <Route path={'/AnanimusChatFront/no-user'} element={<div className={"noUser"}><h2>Пользователь не выбран</h2></div>}/>
+                    <Route path={'/AnanimusChatFront/user/:id'} element={<Dialogs/>}/>
                 </Routes>
             </div>
     );

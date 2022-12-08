@@ -22,7 +22,7 @@ const Main: FC<Props> = ({setOpenModal}) => {
 
     const handleOutLogin = () => {
         updateIsAuth(true)
-        navigate("/")
+        navigate("/AnanimusChatFront")
         localStorage.removeItem('currentUser')
     }
 
