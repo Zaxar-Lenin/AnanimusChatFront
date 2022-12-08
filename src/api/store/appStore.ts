@@ -80,21 +80,21 @@ class AppStore {
         })
     }
 
-    removeUser = async (id: string) => {
-        try {
-            const {data} = await instance.delete<ResponseAddMessage>(apiAuth + Routers.Users + `/${id}`)
-            runInAction(() => {
-                this.isAuth = true
-                this.setSuccessMessage(data.message)
-            })
-        } catch (e) {
-            let errorMessage = "Failed to do something exceptional";
-            if (e instanceof AxiosError) {
-                errorMessage = e.response && e.response.data.message;
-            }
-            this.setErrorMessage(errorMessage)
-        }
-    }
+    // removeUser = async (id: string) => {
+    //     try {
+    //         const {data} = await instance.delete<ResponseAddMessage>(apiAuth + Routers.Users + `/${id}`)
+    //         runInAction(() => {
+    //             this.isAuth = true
+    //             this.setSuccessMessage(data.message)
+    //         })
+    //     } catch (e) {
+    //         let errorMessage = "Failed to do something exceptional";
+    //         if (e instanceof AxiosError) {
+    //             errorMessage = e.response && e.response.data.message;
+    //         }
+    //         this.setErrorMessage(errorMessage)
+    //     }
+    // }
 
     getMessages = async () => {
         const {data} = await instance.post(apiMessage + Routers.Messages, {

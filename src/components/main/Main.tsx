@@ -12,7 +12,7 @@ type Props = {
 }
 
 const Main: FC<Props> = ({setOpenModal}) => {
-    const {getUsers, users, removeUser, currentUser} = app
+    const {getUsers, updateIsAuth} = app
 
     const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ const Main: FC<Props> = ({setOpenModal}) => {
     }, [])
 
     const handleOutLogin = () => {
-        removeUser(currentUser.id)
+        updateIsAuth(true)
         navigate("/")
         localStorage.removeItem('currentUser')
     }
