@@ -12,7 +12,7 @@ import AlertSnackbars from "components/snakBar/VarianSankBars";
 import {MessageSnackBar} from "components/snakBar/MessageSnackBar";
 
 
-const socketIO = io('https://ananimus-chat-server.vercel.app/')
+const socketIO = io('https://ananimuschatserver-production.up.railway.app/')
 
 
 function App() {

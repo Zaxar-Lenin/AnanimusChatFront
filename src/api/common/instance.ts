@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const instance = axios.create({
-    baseURL: "https://ananimus-chat-server.vercel.app/",
+    baseURL: "https://ananimuschatserver-production.up.railway.app/",
 })
