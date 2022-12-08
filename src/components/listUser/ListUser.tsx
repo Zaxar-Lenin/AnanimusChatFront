@@ -10,7 +10,7 @@ const ListUser = () => {
     const navigate = useNavigate()
 
     const onHandleId = (id: string) => {
-        navigate(`/AnanimusChatFront/user/${id}`)
+        navigate(`/user/${id}`)
     }
 
     return (
