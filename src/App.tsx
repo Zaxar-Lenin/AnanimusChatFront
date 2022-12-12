@@ -11,8 +11,8 @@ import AlertSnackbars from "components/snakBar/VarianSankBars";
 import {MessageSnackBar} from "components/snakBar/MessageSnackBar";
 
 
-// const socketIO = io('https://ananimuschatserver-production.up.railway.app/')
-const socketIO = io('http://localhost:5050')
+const socketIO = io('https://ananimuschatserver-production.up.railway.app/')
+// const socketIO = io('http://localhost:5050')
 
 
 function App() {
