@@ -3,7 +3,6 @@ import './App.css';
 import {io} from 'socket.io-client'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {MessageType} from "api/types/types";
 import ModalCustom from "components/modal/Modal";
 import {app} from "api/store/appStore";
 import Main from "components/main/Main";
@@ -12,7 +11,8 @@ import AlertSnackbars from "components/snakBar/VarianSankBars";
 import {MessageSnackBar} from "components/snakBar/MessageSnackBar";
 
 
-const socketIO = io('https://ananimuschatserver-production.up.railway.app/')
+// const socketIO = io('https://ananimuschatserver-production.up.railway.app/')
+const socketIO = io('http://localhost:5050')
 
 
 function App() {
@@ -21,13 +21,13 @@ function App() {
 
     const [name, setName] = useState<string>('')
     const [newMsg, setNewMsg] = useState({
+        id: '',
         topic: '',
         time: '',
         usersChat: ['', ''],
     })
     const [openModal, setOpenModal] = useState(false)
     const [openBar, setOpenBar] = useState(false)
-    const [arrivalMessage, setArrivalMessage] = useState<MessageType>()
 
 
     const socket = useRef(socketIO)
@@ -41,10 +41,6 @@ function App() {
             }
         }
     }, [])
-
-    useEffect(() => {
-        if (arrivalMessage) setMessages([...messages, arrivalMessage])
-    }, [arrivalMessage])
 
     useEffect(() => {
         socket.current.on("connect", () => {
@@ -70,14 +66,9 @@ function App() {
 
     socket.current.on("msg-recieve", (msg) => {
         console.log("sdsdsdds")
-        setArrivalMessage({
-            fromSelf: false,
-            message: msg.message,
-            topic: msg.topic,
-            time: msg.time,
-            usersChat: msg.usersChat,
-        })
+        setMessages([...messages, msg])
         setNewMsg({
+            id: msg.id,
             topic: msg.topic,
             time: msg.time,
             usersChat: msg.usersChat,
@@ -105,9 +96,14 @@ function App() {
                 (
                     <div className="App">
                         <div className={"logIn"}>
-                            <h3>Для входа введите свое имя</h3>
-                            <TextField value={name} onChange={onHandlerChangeName}/>
-                            <Button variant="contained" onClick={onHandleInLog}>Войти</Button>
+                            <div style={{
+                                height: "300px",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between"
+                            }}><h3>Для входа введите свое имя</h3>
+                                <TextField value={name} onChange={onHandlerChangeName}/>
+                                <Button variant="contained" onClick={onHandleInLog}>Войти</Button></div>
                         </div>
                         <AlertSnackbars/>
                     </div>

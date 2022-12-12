@@ -1,4 +1,4 @@
-import React, {FC, MutableRefObject, useState} from 'react';
+import React, {FC} from 'react';
 // @ts-ignore
 import top from 'api/common/image/up-arrow.png'
 // @ts-ignore
@@ -12,42 +12,50 @@ type Props = {
     topic: string;
     time: string;
     usersChat: string[];
-    ref:MutableRefObject<HTMLDivElement | null>;
+    isText: boolean;
+    id: string;
 }
 
 const Message: FC<Props> = ({
                                 usersChat,
-                                fromSelf,
                                 message,
                                 topic,
                                 time,
-                                ref
+                                id,
+                                isText,
                             }) => {
-    const {currentUser, users} = app
+    const {currentUser, users, updateIsTextInMessage} = app
 
     const userChat = users.find(m => m.id === usersChat[0])
 
-    console.log(userChat)
+    const currentNameMessage = () => {
+        if (userChat) {
+            return usersChat[0] === currentUser.id ? currentUser.name : userChat.name
+        }
+        return currentUser.name
+    }
 
-    const [isText, setIsText] = useState(false)
     return (
-        <div ref={ref} style={usersChat[0] === currentUser.id ? {alignSelf: "flex-end"} : {}} className={"message"}>
+        <div
+            style={usersChat[0] === currentUser.id ? {alignSelf: "flex-end"} : {}} className={"message"}>
             <div className={"msHeader"}>
                 <div className={"data"}>Время: {time}</div>
                 {userChat && <div
-                    className={"data"}>Отправитель: {usersChat[0] === currentUser.id ? currentUser.name : userChat.name}</div>}
+                    className={"data"}>Отправитель: {currentNameMessage()}</div>}
             </div>
             <div className={"topic"}>
                 <div>Тема: {topic}</div>
                 {isText
                     ?
                     <div className={"imgC"} onClick={() => {
-                        setIsText(false)
+                        updateIsTextInMessage({isText: false, id})
+                        console.log('false')
                     }}><img src={top} alt=""/></div>
                     :
 
                     <div className={"imgC"} onClick={() => {
-                        setIsText(true)
+                        updateIsTextInMessage({isText: true, id})
+                        console.log('true')
                     }}><img src={bottom} alt=""/></div>
                 }</div>
             <div className={"ms"}>{isText && message}</div>

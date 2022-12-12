@@ -8,6 +8,7 @@ import {TransitionProps} from '@mui/material/transitions';
 import Fade from '@mui/material/Fade';
 import {useNavigate} from "react-router-dom";
 import uuid from 'react-uuid'
+import {app} from "api/store/appStore";
 
 
 const DEFAULT_AUTO_HIDE_DURATION = 6000;
@@ -32,6 +33,10 @@ export const MessageSnackBar = ({
                                 }: props): ReactElement => {
     const navigate = useNavigate()
 
+    const {users, currentUser} = app
+
+    const userChat = users.find(m => m.id === usersChat[0])
+
     const [state, setState] = React.useState<{
         Transition: React.ComponentType<TransitionProps & {
             children: React.ReactElement<any, any>;
@@ -39,18 +44,6 @@ export const MessageSnackBar = ({
     }>({
         Transition: Fade,
     });
-    const handleClick =
-        (
-            Transition: React.ComponentType<TransitionProps & {
-                children: React.ReactElement<any, any>;
-            }>,
-        ) =>
-            () => {
-                setState({
-                    Transition,
-                });
-                setOpenBar(true)
-            };
 
     const handleClose = () => {
         setOpenBar(false)
@@ -58,8 +51,8 @@ export const MessageSnackBar = ({
 
     const onHandleTeleport = () => {
         navigate(`/user/${usersChat[1]}`)
+        setOpenBar(false)
     }
-    const name = "sds"
 
 
     return (
@@ -67,7 +60,6 @@ export const MessageSnackBar = ({
             onClick={onHandleTeleport}
             autoHideDuration={autoHideDuration}
             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-            // style={{backgroundColor: '#ffffff'}}
             open={open}
             onClose={handleClose}
             children={<div style={{
@@ -82,7 +74,7 @@ export const MessageSnackBar = ({
                 flexDirection: "column"
             }}>
                 <div>{time}</div>
-                <div>От: {name}</div>
+                {userChat && <div>От: {usersChat[0] === currentUser.id ? currentUser.name : userChat.name}</div>}
                 <div style={{width: '150px'}}>
                     Тема: {topic}
                 </div>

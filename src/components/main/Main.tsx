@@ -1,7 +1,6 @@
 import React, {Dispatch, FC, SetStateAction, useEffect} from 'react';
 import ListUser from "components/listUser/ListUser";
 import Chat from "components/chat/Chat";
-import Button from "@mui/material/Button";
 import {app} from "api/store/appStore";
 import {observer} from "mobx-react-lite";
 import AlertSnackbars from "components/snakBar/VarianSankBars";
@@ -27,11 +26,13 @@ const Main: FC<Props> = ({setOpenModal}) => {
     }
 
     return (
-        <div className={"main"}>
-            <ListUser/>
-            <Chat handleOutLogin={handleOutLogin} setOpenModal={setOpenModal}/>
+        <>
+            <div className={"main"}>
+                <ListUser/>
+                <Chat handleOutLogin={handleOutLogin} setOpenModal={setOpenModal}/>
+            </div>
             <AlertSnackbars/>
-        </div>
+        </>
     );
 };
 

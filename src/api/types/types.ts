@@ -9,11 +9,17 @@ export type CurrentUSerType = {
 }
 
 export type MessageType = {
+    id: string;
     fromSelf: boolean;
     message: string;
-    topic:string;
+    topic: string;
     time: string;
     usersChat: string[];
+    isText: boolean;
+}
+
+export type ResponseMessageType = {
+    item: MessageType[]
 }
 
 export type ResponseUsers = {
@@ -21,16 +27,20 @@ export type ResponseUsers = {
 }
 
 export type RequestGetMessages = {
-   from: string;
+    from: string;
     to: string;
 }
 
 export type RequestAddMessages = {
-   from: string;
+    from: string;
     to: string;
-    topic:string;
-    message:string;
+    topic: string;
+    message: string;
 }
 export type ResponseAddMessage = {
-   message:string;
+    newMessage: MessageType
+}
+
+export type ResponseUpdateIsText = {
+    message: string
 }

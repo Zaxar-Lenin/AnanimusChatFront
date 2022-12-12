@@ -3,18 +3,21 @@ import {
     CurrentUSerType,
     MessageType,
     RequestAddMessages,
-    ResponseAddMessage,
+    ResponseAddMessage, ResponseMessageType, ResponseUpdateIsText,
     ResponseUsers
 } from "api/types/types";
 import {instance} from "api/common/instance";
 import {apiAuth, apiMessage, Routers} from "api/common/Routes";
 import {Nullable} from "components/snakBar/VarianSankBars";
 import {AxiosError} from "axios";
+import {Socket} from "socket.io-client";
 
 class AppStore {
     isAuth = true
 
     idCurrentChat = ''
+
+    isScroll: boolean = true
 
     errorMessage: Nullable<string> = null;
 
@@ -37,12 +40,21 @@ class AppStore {
         this.currentUser = data
     }
 
+    updateIsTextInMessage = async (params: { id: string; isText: boolean; }) => {
+        this.setMessages(this.messages.map(m => m.id === params.id ? {...m, isText: params.isText} : m))
+        this.setIsScroll(false)
+    }
+
     setUsers = (data: CurrentUSerType[]) => {
         this.users = data
     }
 
     updateIsAuth = (data: boolean) => {
         this.isAuth = data
+    }
+
+    setIsScroll = (data: boolean) => {
+        this.isScroll = data
     }
 
     setIdCurrentChat = (id: string) => {
@@ -80,37 +92,27 @@ class AppStore {
         })
     }
 
-    // removeUser = async (id: string) => {
-    //     try {
-    //         const {data} = await instance.delete<ResponseAddMessage>(apiAuth + Routers.Users + `/${id}`)
-    //         runInAction(() => {
-    //             this.isAuth = true
-    //             this.setSuccessMessage(data.message)
-    //         })
-    //     } catch (e) {
-    //         let errorMessage = "Failed to do something exceptional";
-    //         if (e instanceof AxiosError) {
-    //             errorMessage = e.response && e.response.data.message;
-    //         }
-    //         this.setErrorMessage(errorMessage)
-    //     }
-    // }
-
     getMessages = async () => {
-        const {data} = await instance.post(apiMessage + Routers.Messages, {
-            to: this.idCurrentChat,
-            from: this.currentUser.id
-        })
+        const {data} = await instance.get<ResponseMessageType>(apiMessage + Routers.Messages + `/${this.currentUser.id}/${this.idCurrentChat}`
+        )
         console.log(this.idCurrentChat, this.currentUser.id)
         runInAction(() => {
             this.setMessages(data.item)
         })
     }
 
-    addMessage = async (params: RequestAddMessages) => {
+    addMessage = async (params: { paramsRequest: RequestAddMessages, socket: Socket<any, any> }) => {
+        const {socket, paramsRequest} = params
         try {
-            const {data} = await instance.post<ResponseAddMessage>(apiMessage + Routers.addMessage, params)
-            this.setSuccessMessage(data.message)
+            const {data} = await instance.post<ResponseAddMessage>(apiMessage + Routers.addMessage, paramsRequest)
+            if (data.newMessage) {
+                socket.emit("add-message", {
+                    message: data.newMessage
+                })
+            }
+            this.setMessages([...this.messages, data.newMessage])
+            this.setIsScroll(true)
+            this.setSuccessMessage("Successful")
         } catch (e) {
             let errorMessage = "Failed to do something exceptional";
             if (e instanceof AxiosError) {

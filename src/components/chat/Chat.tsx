@@ -16,28 +16,35 @@ const Chat: FC<Props> = ({handleOutLogin, setOpenModal}) => {
 
     const navigate = useNavigate()
 
-    if(!currentUser){
+    if (!currentUser) {
         navigate("/")
     }
 
     return (
-            <div className={"chat"}>
+        <div className={"chat"}>
+            <div className={"headerBox"}>
                 <div className={"header"}>
-                    <div className={"headerName"}>you: {currentUser.name}</div>
-                    <Button onClick={() => {
-                    setOpenModal(true)
-                }} variant="contained" sx={{margin: "0 30px 0 0"}}>Создать
-                    сообщения</Button>
-                    <Button onClick={handleOutLogin} variant="outlined" sx={{
-                        backgroundColor: '#6857ea',
-                        color: "#000",
-                    }}>Выйти</Button></div>
+                    <div className={"headerContainer"}>
+                        <div className={"headerName"}>you: {currentUser.name}</div>
+                        <Button onClick={() => {
+                            setOpenModal(true)
+                        }} variant="contained" sx={{margin: "0 30px 0 0"}}>Создать
+                            сообщения</Button>
+                        <Button onClick={handleOutLogin} variant="outlined" sx={{
+                            backgroundColor: '#6857ea',
+                            color: "#000",
+                        }}>Выйти</Button></div>
+                </div>
+            </div>
+            <div
+                style={{height: '90%'}}
+            >
                 <Routes>
-                    <Route path={"/*"} element={<Navigate to={'/no-user'} />}/>
+                    <Route path={"/*"} element={<Navigate to={'/no-user'}/>}/>
                     <Route path={'/no-user'} element={<div className={"noUser"}><h2>Пользователь не выбран</h2></div>}/>
                     <Route path={'/user/:id'} element={<Dialogs/>}/>
-                </Routes>
-            </div>
+                </Routes></div>
+        </div>
     );
 };
 
