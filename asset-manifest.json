@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/AnanimusChatFront/static/css/main.05b05b53.css",
-    "main.js": "/AnanimusChatFront/static/js/main.c3b28ca7.js",
+    "main.css": "/AnanimusChatFront/static/css/main.6b0663b1.css",
+    "main.js": "/AnanimusChatFront/static/js/main.76a8a6dd.js",
     "index.html": "/AnanimusChatFront/index.html",
-    "main.05b05b53.css.map": "/AnanimusChatFront/static/css/main.05b05b53.css.map",
-    "main.c3b28ca7.js.map": "/AnanimusChatFront/static/js/main.c3b28ca7.js.map"
+    "main.6b0663b1.css.map": "/AnanimusChatFront/static/css/main.6b0663b1.css.map",
+    "main.76a8a6dd.js.map": "/AnanimusChatFront/static/js/main.76a8a6dd.js.map"
   },
   "entrypoints": [
-    "static/css/main.05b05b53.css",
-    "static/js/main.c3b28ca7.js"
+    "static/css/main.6b0663b1.css",
+    "static/js/main.76a8a6dd.js"
   ]
 }
